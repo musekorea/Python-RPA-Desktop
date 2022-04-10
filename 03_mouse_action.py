@@ -9,3 +9,7 @@ pyautogui.click(237, 469, duration=0.5) #그림판 캔버스 위에 마우스 �
 pyautogui.mouseDown()
 pyautogui.move(200,200, duration=3)
 pyautogui.mouseUp()
+
+pyautogui.sleep(2)
+#pyautogui.rightClick(400,400)
+pyautogui.middleClick(900,600)
