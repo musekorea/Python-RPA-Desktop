@@ -1,21 +1,26 @@
 import pyautogui
 import time
 import sys
- 
-timeout = 10        #대기할 시간 
-start_time = time.time() #시작시간
 
-image = pyautogui.locateOnScreen("file.png")
-if image:
-  print("바로실행")
-  pyautogui.click(image)
-  sys.exit()
+timeout = 10
 
-while image==None:
-  image = pyautogui.locateOnScreen("file.png")
-  current_time = time.time()
-  if current_time-start_time>10:
-    print("시간초과")
-    sys.exit()
+def find_target(img):
+  start_time = time.time()
+  target = None
+  while target==None:
+    target = pyautogui.locateOnScreen(img)
+    current_time = time.time()
+    if current_time-start_time>timeout:
+      break
+  return target
 
-pyautogui.click(image)
+def click_target(img):
+  target = find_target(img)
+  if target==None:
+     print(f"[{img}] Not Found, Time out error occured")
+     sys.exit()
+  else:
+    print(target)
+    pyautogui.click(target)
+
+click_target("file.png")
